@@ -6,37 +6,118 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profil Mahasiswa')),
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        title: const Text('Profil Mahasiswa', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        foregroundColor: Colors.black87,
+      ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.blueGrey,
-                child: Icon(Icons.person, size: 50, color: Colors.white),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Container(
+              padding: const EdgeInsets.all(28.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              SizedBox(height: 16),
-              Text(
-                'Oktorio Mahmud Ozy Saputra',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.blueAccent, width: 3),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueAccent.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: const CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Colors.blueAccent,
+                      backgroundImage: AssetImage('assets/images/profile.jpg'),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Oktorio Mahmud Ozy Saputra',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade50,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'NIM: 1062551',
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(height: 30),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Informasi Akademik',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  _buildInfoTile(Icons.school_outlined, 'Universitas', 'Polman (Politeknik Manufaktur)'),
+                  _buildInfoTile(Icons.class_outlined, 'Kelas', '2 TRPLB '),
+                  _buildInfoTile(Icons.computer_rounded, 'Projek Aplikasi', 'PawPal Care Center'),
+                ],
               ),
-              SizedBox(height: 8),
-              Text(
-                'NIM: 1062551',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Program Studi: Software Engineering Technology (1TRPLB)',
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoTile(IconData icon, String title, String subtitle) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: Colors.blueAccent, size: 20),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                const SizedBox(height: 2),
+                Text(subtitle, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
